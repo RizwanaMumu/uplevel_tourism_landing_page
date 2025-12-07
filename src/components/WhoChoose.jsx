@@ -42,7 +42,7 @@ const WhoChoose = () => {
         >
           Chi <span className="text-primaryGreen font-medium">sceglie</span> il Master in
           <br />
-          Hospitality Management
+          Tourism Management
         </h2>
 
         {/* Feature Grid */}

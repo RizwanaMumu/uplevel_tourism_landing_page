@@ -24,22 +24,30 @@
   ExpiresByType text/javascript "access plus 1 month"
   ExpiresByType application/javascript "access plus 1 month"
 
-  # HTML
-  ExpiresByType text/html "access plus 1 hour"
+  # Disable caching for HTML
+  ExpiresByType text/html "access plus 0 seconds"
 </IfModule>
 
-# --- Redirect index.html to clean URL ---
+# --- Force no caching for HTML (extra) ---
+<FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+</FilesMatch>
+
+# --- Set default index file ---
+DirectoryIndex index.html
+
+# --- Redirect explicit index.html to folder URL ---
 RewriteEngine On
+RewriteCond %{THE_REQUEST} /dev_tourism/index\.html [NC]
+RewriteRule ^index\.html$ /dev_tourism/ [L,R=301]
 
-# Only redirect inside this folder
-RewriteCond %{THE_REQUEST} /dev_hospitality/index\.html [NC]
-RewriteRule ^index\.html$ /dev_hospitality/ [L,R=301]
-
-# Optional: Force HTTPS (if this folder is served under HTTPS)
+# --- Optional: Force HTTPS ---
 # RewriteCond %{HTTPS} off
 # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-# --- Security Headers (optional but recommended) ---
+# --- Security Headers ---
 <IfModule mod_headers.c>
   Header set X-Content-Type-Options "nosniff"
   Header set X-XSS-Protection "1; mode=block"

@@ -143,7 +143,7 @@ const StudyPlan = () => {
           Piano di <span className="text-[#15AF17] font-medium">Studi</span>
         </h2>
         <p className="text-center text-[#042453] mb-8">
-          Il programma di studi del master per i nuovi manager dell’hospitality prevede lo studio delle seguenti materie:
+          Il percorso di studi del Master prevede lezioni di:
         </p>
 
         <div className="space-y-5">

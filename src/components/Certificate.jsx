@@ -24,7 +24,7 @@ const Certificate = () => {
           <div className="flex-1 flex justify-center">
             <img
               src={certificateImage}
-              alt="Certificate of Hospitality"
+              alt="Certificate of Tourism Master"
               className="w-[70%] max-w-md object-contain rounded-lg shadow-lg"
               loading="lazy"
               decoding="async"

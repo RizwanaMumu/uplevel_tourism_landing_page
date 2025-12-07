@@ -40,7 +40,7 @@ const Partners = () => {
         >
           I <span className="text-primaryGreen font-medium">Partner</span> del Master in
           <br />
-          Hospitality Management
+          Tourism Management
         </h2>
 
         <ul
