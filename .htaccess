@@ -1,6 +1,5 @@
 # --- Enable GZIP Compression ---
 <IfModule mod_deflate.c>
-  # Compress HTML, CSS, JS, JSON, XML
   AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml+rss
 
   # Remove browser bugs (optional)
@@ -38,8 +37,14 @@
 # --- Set default index file ---
 DirectoryIndex index.html
 
-# --- Redirect explicit index.html to folder URL ---
+# --- Redirect folder URL to latest index.html ---
 RewriteEngine On
+
+# Force /dev_tourism/ to always load /index.html
+RewriteCond %{REQUEST_URI} ^/dev_tourism/?$ [NC]
+RewriteRule ^dev_tourism/?$ /dev_tourism/index.html [L]
+
+# Optional: Redirect explicit index.html to folder (clean URL)
 RewriteCond %{THE_REQUEST} /dev_tourism/index\.html [NC]
 RewriteRule ^index\.html$ /dev_tourism/ [L,R=301]
 

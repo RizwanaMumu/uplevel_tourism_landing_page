@@ -12,6 +12,8 @@ const TourismFormFooter = () => {
 
   const [showThankYou, setShowThankYou] = useState(false);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     if (!phoneInputRef.current) return;
 
@@ -33,6 +35,10 @@ const TourismFormFooter = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
 
     if (!formRef.current) return;
 
@@ -84,6 +90,7 @@ const TourismFormFooter = () => {
           };
           const msg = errorMap[errorCode] || "Invalid number";
           setErrorMessage(msg);
+          setIsSubmitting(false);
           return;
         }
 
@@ -200,6 +207,8 @@ const TourismFormFooter = () => {
       toast({
         title: "Errore di rete. Riprova.",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -349,7 +358,10 @@ const TourismFormFooter = () => {
             <div className="md:col-span-2">
               <button
                 type="submit"
-                className="cta-button mt-4 w-full bg-[rgb(8,55,122)] py-3 px-6 gap-10 flex items-center justify-center"
+                disabled={isSubmitting}
+                className={`cta-button mt-4 w-full bg-[rgb(8,55,122)] py-3 px-6 gap-3 flex items-center justify-center transition-all ${
+                  isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+                }`}
                 aria-label="Submit"
               >
                 Richiedi informazioni
@@ -370,6 +382,9 @@ const TourismFormFooter = () => {
                     />
                   </svg>
                 </span>
+                {isSubmitting && (
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin ml-2"></div>
+                )}
               </button>
             </div>
           </form>
